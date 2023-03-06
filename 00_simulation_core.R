@@ -145,9 +145,10 @@ summarize_power <- function(indf){
      obs_mean_npos = mean(n_pos),
      obs_mean_nneg = mean(n_neg),
      
+     #Derive test pos and test neg numbers
      obs_mean_testpos = mean(n_tp + n_fp),
      obs_mean_testneg = mean(n_fn + n_tn),
-     
+
      obs_avg_effective_sample_size = mean(n_effective),
      
      obs_sens_power = mean(sim_sens_pass),
