@@ -129,14 +129,17 @@ return(outdf)
 
 summarize_power <- function(indf){
  summary_df <- indf %>%
-   group_by(n_total,est_sensitivity_vec,
+   mutate(
+         data_id = glue::glue("LCI Limits: sens {sens_lower_boundary_vec}, spec {spec_lower_boundary_vec}, ppv {ppv_lower_boundary_vec}, npv {npv_lower_boundary_vec}")
+   ) %>%
+   group_by(n_total,data_id, 
+            est_sensitivity_vec,
                     est_specificity_vec,
                     sens_lower_boundary_vec,
                     spec_lower_boundary_vec,
                     ppv_lower_boundary_vec,
                     npv_lower_boundary_vec) %>%
    summarize(
-     data_id = glue::glue("LCI Limits: sens {sens_lower_boundary_vec}, spec {spec_lower_boundary_vec}, ppv {ppv_lower_boundary_vec}, npv {npv_lower_boundary_vec}"),
      num_sims = n(),
      obs_sample_size = mean(n_total),
      obs_mean_npos = mean(n_pos),
@@ -221,7 +224,7 @@ ex1_power <- summarize_power(ex1_df)
 
 
 
-## Calculation for the PH Study
+## Calculation for the Study # 2
 
 ex2_vector <- c(.25, .10, .05, .05, .1, .02, .01, .07, .35)
 ex2_df <- gen_sim_data(n_sample_size = 500, n_sims = 2000, p_vec = ex2_vector) %>%
