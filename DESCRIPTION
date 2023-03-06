@@ -1,0 +1,35 @@
+Package: simDiagnosticAccuracyPower
+Title: Simulation Routine for Diagnostic Accuracy Studies
+Version: 0.0.0.5000
+Authors@R: 
+  c(person(given = "Rickey",
+           family = "Carter",
+           role = c("aut", "cre"),
+           email = "carter.rickey@mayo.edu",
+           comment = c(ORCID = "0000-0002-0818-273X")
+           )
+           )
+Description: Quickly simulate power considerations for a diagnostic accuracy study.  Allows for a mixing of two endpoints to determine the reference criterion.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Depends: R (>= 2.10)
+Imports: 
+    tidyverse,
+    scales,
+    binom,
+    stats,
+    tidyr,
+    ggplot2,
+    cowplot,
+    glue
+Suggests:
+    boot,
+    rmarkdown,
+    knitr,
+    testthat (>= 2.1.0)
+RoxygenNote: 7.2.2
+Language: en-US
+URL: https://github.com/rickeycarter/simDiagnosticAccuracyPower/
+
+
