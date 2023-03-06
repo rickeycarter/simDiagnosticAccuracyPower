@@ -6,7 +6,7 @@ You can install the development version from
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("rickeycarter/simDiagnosticAccuracyPower/")
+devtools::install_github("rickeycarter/simDiagnosticAccuracyPower")
 ```
 
 ## Example
