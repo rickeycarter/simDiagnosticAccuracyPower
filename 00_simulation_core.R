@@ -20,13 +20,13 @@ ppv_lower_boundary = 0.4,
 npv_lower_boundary = 0.9,
 p_vec = c(.25, .10, .05, .05, .1, .02, .01, .07, .35),
 pos_group = c(1,2,3,7),
-neg_group = c(4,5,6,9)
+neg_group = c(4,5,6,9),
+alpha=0.05
 ){
 
 # Start of the function calculations
 
 p_total <- sum(p_vec)
-
 
 ## Build out the case distribution and allow for the exclusion of the indeterminate cases 
 
@@ -62,17 +62,19 @@ n_neg == n_tn + n_fp
 
 ## Derive measures of diagnostic performance
 
+set_conf_level <- rep(1 - alpha, n_sims)
+
 sim_sens <- n_tp / n_pos
-sim_sens_lci <- binom::binom.exact(n_tp, n_pos)$lower
+sim_sens_lci <- binom::binom.exact(n_tp, n_pos, conf.level = set_conf_level)$lower
 
 sim_spec <- n_tn / n_neg
-sim_spec_lci <- binom::binom.exact(n_tn, n_neg)$lower
+sim_spec_lci <- binom::binom.exact(n_tn, n_neg, conf.level = set_conf_level)$lower
 
 sim_ppv <- n_tp / (n_tp + n_fp)
-sim_ppv_lci <- binom::binom.exact(n_tp, n_tp+n_fp)$lower
+sim_ppv_lci <- binom::binom.exact(n_tp, n_tp+n_fp, conf.level = set_conf_level)$lower
 
 sim_npv <- n_tn / (n_fn + n_tn)
-sim_npv_lci <- binom::binom.exact(n_tn, n_fn+n_tn)$lower
+sim_npv_lci <- binom::binom.exact(n_tn, n_fn+n_tn, conf.level = set_conf_level)$lower
 
 ## make some objects with references of the parameters
 
@@ -86,7 +88,8 @@ npv_lower_boundary_vec = rep(ppv_lower_boundary, n_sims)
 
 ## make a combined data frame with all results
 
-outdf <- data.frame(est_sensitivity_vec,
+outdf <- data.frame(set_conf_level,
+  est_sensitivity_vec,
                     est_specificity_vec,
                     sens_lower_boundary_vec,
                     spec_lower_boundary_vec,
@@ -130,9 +133,10 @@ return(outdf)
 summarize_power <- function(indf){
  summary_df <- indf %>%
    mutate(
-         data_id = glue::glue("LCI Limits: sens {sens_lower_boundary_vec}, spec {spec_lower_boundary_vec}, ppv {ppv_lower_boundary_vec}, npv {npv_lower_boundary_vec}")
+         data_id = glue::glue("{100*set_conf_level}% LCI Limits: sens {sens_lower_boundary_vec}, spec {spec_lower_boundary_vec}, ppv {ppv_lower_boundary_vec}, npv {npv_lower_boundary_vec}")
    ) %>%
-   group_by(n_total,data_id, 
+   group_by(n_total,data_id,
+            set_conf_level,
             est_sensitivity_vec,
                     est_specificity_vec,
                     sens_lower_boundary_vec,
