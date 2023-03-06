@@ -52,6 +52,7 @@ summarize_power <- function(indf){
      x="Total Number of Cases (records) Studied",
      y="Simulation Mean Number Disease Positive Cases"
      )
+ 
  p_nneg <- ggplot(summary_df , aes(n_total, obs_mean_nneg)) + 
    facet_grid(~data_id)+
    geom_point()+
@@ -60,7 +61,8 @@ summarize_power <- function(indf){
      x="Total Number of Cases (records) Studied",
      y="Simulation Mean Number Disease Negative Cases"
      )
-                  
+
+
  p_sens_power <-ggplot(summary_df, aes(obs_mean_npos, obs_sens_power)) + 
    facet_grid(~data_id)+
    geom_point()+
@@ -72,6 +74,7 @@ summarize_power <- function(indf){
      x="Simulation Mean Number Disease Positive Cases",
      y="Empirical Power - Sensitivity"
      )
+
  p_spec_power <-ggplot(summary_df, aes(obs_mean_nneg, obs_spec_power)) + 
    facet_grid(~data_id)+
    geom_point()+
@@ -83,6 +86,8 @@ summarize_power <- function(indf){
      x="Simulation Mean Number Negative Cases",
      y="Empirical Power - Specificity"
      )
+
+
  p_ppv_power <-ggplot(summary_df, aes(n_total, obs_ppv_power)) + 
    facet_grid(~data_id)+
    geom_point()+
@@ -94,6 +99,8 @@ summarize_power <- function(indf){
      x="Total Number of Cases (records) Studied",
      y="Empirical Power - PPV"
      )
+
+
  p_npv_power <-ggplot(summary_df, aes(n_total, obs_npv_power)) + 
    facet_grid(~data_id)+
    geom_point()+
@@ -105,6 +112,8 @@ summarize_power <- function(indf){
      x="Total Number of Cases (records) Studied",
      y="Empirical Power - NPV"
      )
+
+ 
  p_combined <- cowplot::plot_grid(p_npos,
                                   p_nneg,
                                   p_sens_power, 

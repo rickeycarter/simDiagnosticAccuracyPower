@@ -27,6 +27,7 @@ ex1_power <- summarize_power(ex1_df)
 
 ex1_power$powerplot
 
+
 ex1_power$powerdata %>% knitr::kable()
 
 ```
