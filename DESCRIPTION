@@ -1,6 +1,6 @@
 Package: simDiagnosticAccuracyPower
 Title: Simulation Routine for Diagnostic Accuracy Studies
-Version: 0.0.0.5000
+Version: 0.0.0.5001
 Authors@R: 
   c(person(given = "Rickey",
            family = "Carter",
