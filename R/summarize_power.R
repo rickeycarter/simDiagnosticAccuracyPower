@@ -129,6 +129,7 @@ summarize_power <- function(indf){
      y="Empirical Power - Joint Sens & Spec test"
      )
 
+
  p_global_power <-ggplot(summary_df, aes(n_total, obs_global_power)) + 
    facet_grid(~data_id)+
    geom_point()+
