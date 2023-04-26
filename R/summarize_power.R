@@ -42,7 +42,10 @@ summarize_power <- function(indf){
      
      obs_npv_power = mean(sim_npv_pass),
      obs_npv_mean = mean(sim_npv),
-     obs_npv_mean_lci = mean(sim_npv_lci)
+     obs_npv_mean_lci = mean(sim_npv_lci),
+     
+     obs_sens_spec_power = mean(sim_sens_spec_pass),
+     obs_global_power = mean(sim_global_pass)
         )
  p_npos <- ggplot(summary_df, aes(n_total, obs_mean_npos))+
    facet_grid(~data_id)+
@@ -114,12 +117,41 @@ summarize_power <- function(indf){
      )
 
  
+ p_sens_spec_power <-ggplot(summary_df, aes(n_total, obs_sens_spec_power)) + 
+   facet_grid(~data_id)+
+   geom_point()+
+   geom_line()+
+   coord_cartesian(ylim = c(0, 1.0)) +
+   geom_hline(yintercept = .8, linetype="dashed") +
+   geom_hline(yintercept = .9, linetype="dashed") +
+   labs(
+     x="Total Number of Cases (records) Studied",
+     y="Empirical Power - Joint Sens & Spec test"
+     )
+
+ p_global_power <-ggplot(summary_df, aes(n_total, obs_global_power)) + 
+   facet_grid(~data_id)+
+   geom_point()+
+   geom_line()+
+   coord_cartesian(ylim = c(0, 1.0)) +
+   geom_hline(yintercept = .8, linetype="dashed") +
+   geom_hline(yintercept = .9, linetype="dashed") +
+   labs(
+     x="Total Number of Cases (records) Studied",
+     y="Empirical Power - Joint Sens, Spec, PPV, NPV test"
+     )
+
+ 
+ 
  p_combined <- cowplot::plot_grid(p_npos,
                                   p_nneg,
                                   p_sens_power, 
                                   p_spec_power,
                                   p_ppv_power,
-                                  p_npv_power,nrow = 3, ncol=2)
+                                  p_npv_power,
+                                  p_sens_spec_power,
+                                  p_global_power,
+                                  nrow = 4, ncol=2)
  outlist<-list(
    powerplot = p_combined,
    powerdata = summary_df

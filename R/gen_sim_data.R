@@ -127,6 +127,14 @@ outdf <- outdf %>%
       sim_npv_lci > npv_lower_boundary ~ 1,
       TRUE ~ 0
     ),
+    sim_sens_spec_pass = case_when(
+      sim_sens_pass == 1 & sim_spec_pass == 1 ~ 1,
+      TRUE ~ 0
+    ),
+    sim_global_pass = case_when(
+      sim_sens_pass == 1 & sim_spec_pass == 1 & sim_ppv_pass == 1 & sim_npv_pass == 1 ~ 1,
+      TRUE ~ 0
+    ),
     sim_disease_prevalance = n_pos / n_total,
     sim_effective_prevalance = n_pos / n_effective
   )
