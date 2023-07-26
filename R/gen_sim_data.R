@@ -87,7 +87,7 @@ est_specificity_vec = rep(est_specificity, n_sims)
 sens_lower_boundary_vec = rep(sens_lower_boundary, n_sims)
 spec_lower_boundary_vec = rep(spec_lower_boundary, n_sims)
 ppv_lower_boundary_vec = rep(ppv_lower_boundary, n_sims)
-npv_lower_boundary_vec = rep(ppv_lower_boundary, n_sims)
+npv_lower_boundary_vec = rep(npv_lower_boundary, n_sims)
 
 
 ## make a combined data frame with all results
