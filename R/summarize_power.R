@@ -1,9 +1,11 @@
 #' Summarize empirical power based on an input dataset of simulated experiments. Will return a list of results: plot of power curves (powerplot) and data frame of power results (powerresults)
 #'
 #' @param indf A data frame of simulated data generated from the gen_sim_data function
+#' @param target_power Target power (decimal form) for reference line drawn on graphs. Defaults to 0.90. 
 #' @export
 
-summarize_power <- function(indf){
+summarize_power <- function(indf, 
+                            target_power = 0.90){
  summary_df <- indf %>%
    mutate(
          data_id = glue::glue("{100*set_conf_level}% LCI Limits: sens {sens_lower_boundary_vec}, spec {spec_lower_boundary_vec}, ppv {ppv_lower_boundary_vec}, npv {npv_lower_boundary_vec}")
@@ -71,8 +73,7 @@ summarize_power <- function(indf){
    geom_point()+
    geom_line() +
    coord_cartesian(ylim = c(0, 1.0)) +
-   geom_hline(yintercept = .8, linetype="dashed") +
-   geom_hline(yintercept = .9, linetype="dashed") +
+   geom_hline(yintercept = target_power, linetype="dashed") +
    labs(
      x="Simulation Mean Number Disease Positive Cases",
      y="Empirical Power - Sensitivity"
@@ -83,8 +84,7 @@ summarize_power <- function(indf){
    geom_point()+
    geom_line()+
    coord_cartesian(ylim = c(0, 1.0)) +
-   geom_hline(yintercept = .8, linetype="dashed") +
-   geom_hline(yintercept = .9, linetype="dashed") +
+   geom_hline(yintercept = target_power, linetype="dashed") +
    labs(
      x="Simulation Mean Number Negative Cases",
      y="Empirical Power - Specificity"
@@ -96,8 +96,7 @@ summarize_power <- function(indf){
    geom_point()+
    geom_line()+
    coord_cartesian(ylim = c(0, 1.0)) +
-   geom_hline(yintercept = .8, linetype="dashed") +
-   geom_hline(yintercept = .9, linetype="dashed") +
+   geom_hline(yintercept = target_power, linetype="dashed") +
    labs(
      x="Total Number of Cases (records) Studied",
      y="Empirical Power - PPV"
@@ -109,8 +108,7 @@ summarize_power <- function(indf){
    geom_point()+
    geom_line()+
    coord_cartesian(ylim = c(0, 1.0)) +
-   geom_hline(yintercept = .8, linetype="dashed") +
-   geom_hline(yintercept = .9, linetype="dashed") +
+   geom_hline(yintercept = target_power, linetype="dashed") +
    labs(
      x="Total Number of Cases (records) Studied",
      y="Empirical Power - NPV"
@@ -122,8 +120,7 @@ summarize_power <- function(indf){
    geom_point()+
    geom_line()+
    coord_cartesian(ylim = c(0, 1.0)) +
-   geom_hline(yintercept = .8, linetype="dashed") +
-   geom_hline(yintercept = .9, linetype="dashed") +
+   geom_hline(yintercept = target_power, linetype="dashed") +
    labs(
      x="Total Number of Cases (records) Studied",
      y="Empirical Power - Joint Sens & Spec test"
@@ -135,8 +132,7 @@ summarize_power <- function(indf){
    geom_point()+
    geom_line()+
    coord_cartesian(ylim = c(0, 1.0)) +
-   geom_hline(yintercept = .8, linetype="dashed") +
-   geom_hline(yintercept = .9, linetype="dashed") +
+  geom_hline(yintercept = target_power, linetype="dashed") +
    labs(
      x="Total Number of Cases (records) Studied",
      y="Empirical Power - Joint Sens, Spec, PPV, NPV test"

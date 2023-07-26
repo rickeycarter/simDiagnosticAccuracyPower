@@ -25,7 +25,8 @@ npv_lower_boundary = 0.9,
 p_vec = c(.25, .10, .05, .05, .1, .02, .01, .07, .35),
 pos_group = c(1,2,3,7),
 neg_group = c(4,5,6,9),
-alpha=0.05
+alpha=0.05,
+target_power = 0.90
 ){
 
 # Start of the function calculations

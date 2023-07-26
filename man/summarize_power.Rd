@@ -4,10 +4,12 @@
 \alias{summarize_power}
 \title{Summarize empirical power based on an input dataset of simulated experiments. Will return a list of results: plot of power curves (powerplot) and data frame of power results (powerresults)}
 \usage{
-summarize_power(indf)
+summarize_power(indf, target_power = 0.9)
 }
 \arguments{
 \item{indf}{A data frame of simulated data generated from the gen_sim_data function}
+
+\item{target_power}{Target power (decimal form) for reference line drawn on graphs. Defaults to 0.90.}
 }
 \description{
 Summarize empirical power based on an input dataset of simulated experiments. Will return a list of results: plot of power curves (powerplot) and data frame of power results (powerresults)

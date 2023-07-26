@@ -16,7 +16,8 @@ gen_sim_data(
   p_vec = c(0.25, 0.1, 0.05, 0.05, 0.1, 0.02, 0.01, 0.07, 0.35),
   pos_group = c(1, 2, 3, 7),
   neg_group = c(4, 5, 6, 9),
-  alpha = 0.05
+  alpha = 0.05,
+  target_power = 0.9
 )
 }
 \arguments{
